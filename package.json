@@ -6,6 +6,9 @@
   },
   "main": "app://host/index.html",
   "version": "0.2.0",
+  "webkit": {
+    "plugin": true
+  },
   "window": {
     "title": "Popcorn Time",
     "icon": "images/icon.png",

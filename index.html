@@ -133,6 +133,9 @@
             </div>
 
             <p><%= synopsis %></p>
+            <div id="trailer-window" style="display:none;" data-url="http://www.youtube.com/embed/<%=this.model.get('trailer')%>?version=3&enablejsapi=1">
+              <iframe width="420" height="345" src="http://www.youtube.com/embed/<%=this.model.get('trailer')%>?version=3&enablejsapi=1" id="youtube-trailer"></iframe>
+            </div>
 
             <% if ( ! _.isEmpty(subtitles) ) { %>
             <div class="subtitles-list">
@@ -153,6 +156,10 @@
             <% if (this.model.get('torrents')) { %>
               <a href="" class="p_tooltip play-button" disabled="disabled"><%= i18n.__('watchItNow') %></a>
             <% } %>
+            <% if (this.model.get('trailer')) { %>
+              <a href="" class="p_tooltip play-trailer"><%= i18n.__('trailerButton') %></a>
+            <% } %>
+            <br/><br/>
           </div>
         </div>
       </div>

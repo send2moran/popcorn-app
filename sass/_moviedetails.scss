@@ -120,7 +120,7 @@ sidebar {
     }
   }
 
-  a.play-button {
+  a.play-button, a.play-trailer {
     text-align: center;
     color: #FFF;
     font-weight: bold;
@@ -416,6 +416,7 @@ sidebar {
               .flag {
                 &.flag-english { background-image: url(../images/english.png); }
                 &.flag-french { background-image: url(../images/french.png); }
+                &.flag-hebrew { background-image: url(../images/hebrew.png); }
                 &.flag-dutch { background-image: url(../images/dutch.png); }
                 &.flag-portuguese { background-image: url(../images/portuguese.png); }
                 &.flag-romanian { background-image: url(../images/romanian.png); }
@@ -432,7 +433,7 @@ sidebar {
           }
         }
 
-        a.play-button {
+        a.play-button, a.play-trailer {
           background: $popcorn-blue;
           background-image: linear-gradient(to bottom, #3076ce 0%, #175ab0 100%);
           color: #FFF;

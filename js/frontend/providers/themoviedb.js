@@ -4,6 +4,25 @@ var mdb = require('moviedb')(vendorAPIs.themoviedb.key),
     BACKDROP_PREFIX = 'http://image.tmdb.org/t/p/original/',
     last = +new Date();
 
+// Overriding moviedb movieInfo function to retrieve trailer information
+mdb.movieInfo = function(params, fn){
+  var request = require('moviedb/node_modules/superagent');
+  params = params || {};
+  endpoint = 'movie/:id';
+  endpoint = endpoint.replace(':id', params.id);
+  base_url = "https://api.themoviedb.org/3/";
+  api_key = vendorAPIs.themoviedb.key;
+  
+  var req = request.get(base_url + endpoint)
+            .query({api_key : api_key, append_to_response : "trailers"})
+            .set('Accept', 'application/json')
+            .end(function(res){
+            if(res.ok) fn(null, res.body);
+            else if(res.body && res.body.status_message) fn(new Error(res.body.status_message), null);
+            else fn(new Error(res.text), null);
+            });
+};
+
 var findMovieInfo = function (imdbId, callback) {
     var doRequest = function () {
         // 1 sec because limit is 3 calls every second, and we need to use 2.
@@ -29,13 +48,22 @@ var findMovieInfo = function (imdbId, callback) {
                         });
                     }
 
+                    if(!data.trailers.youtube[0]===null){
+                        var youtubeTrailer = null;
+                        console.log("trailer not found");
+                    }else{
+                        var youtubeTrailer = data.trailers.youtube[0].source;
+                        console.log("found trailer:"+youtubeTrailer);
+                    }
+
                     var info = {
                         image:       POSTER_PREFIX + data.poster_path,
                         backdrop:    BACKDROP_PREFIX + data.backdrop_path,
                         overview:    data.overview,
                         title:       data.title,
                         voteAverage: data.vote_average,
-                        runtime:     data.runtime
+                        runtime:     data.runtime,
+                        trailer:     youtubeTrailer,
                     };
 
                     console.log('Fetched info for', imdbId, ':', info);
@@ -81,7 +109,8 @@ var MdbProvider = {
 
                 image:      info.image,
                 bigImage:   info.image,
-                backdrop:   info.backdrop
+                backdrop:   info.backdrop,
+                trailer:    info.trailer,
             });
             model.set('hasMetadata', true);
         });

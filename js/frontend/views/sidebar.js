@@ -6,6 +6,7 @@ App.View.Sidebar = Backbone.View.extend({
     events: {
         'click .closer':           'hide',
         'click .play-button':      'play',
+        'click .play-trailer':     'playTrailer',
         'click .subtitles button': 'selectSubtitle',
         'click .dropdown-toggle':  'toggleDropdown',
         'click #switch-on':        'enableHD',
@@ -38,6 +39,8 @@ App.View.Sidebar = Backbone.View.extend({
     play: function (evt) {
         evt.preventDefault();
         if( videoStreamer !== null ){ return; }
+
+        $('#youtube-trailer').attr('src', $('#trailer-window').data('url'));
 
         var file = this.model.get('torrent'),
             subs = this.model.get('subtitles');
@@ -82,6 +85,11 @@ App.View.Sidebar = Backbone.View.extend({
         );
 
     },
+    
+    playTrailer: function(evt){
+        evt.preventDefault();
+        $('#trailer-window').show();
+    },
 
     initialize: function () {
         this.setElement($('sidebar'));
@@ -122,6 +130,7 @@ App.View.Sidebar = Backbone.View.extend({
           "dutch": "nl",
           "english": "en",
           "french": "fr",
+          "hebrew": "he",
           "portuguese": "pt",
           "romanian": "ro",
           "spanish": "es",

@@ -61,6 +61,16 @@
           <label for="settings-autoclearcache"><%= i18n.__('Auto clear cache')%></label>
         </div>
 
+
+        <div class="option">
+          <h2><%= i18n.__('Default_Subtitle')%></h2>
+          <select id="default_subtitle_select">
+            <% for (var i = 0, keys = _.keys(subtitles), l = keys.length; i < l; ++i) { %>
+                  <option><%= i18n.__(keys[i]) %></option>
+            <% } %>
+          </select>
+        </div>
+
         <div><a class="save medium-button"><%= i18n.__('Save') %></a></div>
       </form>
     </script>

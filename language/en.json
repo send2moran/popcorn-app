@@ -22,6 +22,7 @@
 	"legalDisclaimerResponsible": "We are not responsible for any problems that may arise, so make sure you understand our Terms and Conditions before using the app.",
 	"legalDisclaimerAccept": "I understand",
 	"legalDisclaimerCancel": "Leave",
+	"Default_Subtitle": "Default Subtitle",
 	"genres": {
 		"all": "Popular",
 		"action": "Action",
@@ -71,5 +72,8 @@
 	"finnish": "finnish",
 	"brazilian": "brazilian",
 	"russian": "russian",
-	"german": "german"
+	"german": "german",
+	"hebrew": "hebrew",
+	"ukrainian": "ukrainian",
+	"latvian": "latvian"
 }

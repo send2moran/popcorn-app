@@ -62,6 +62,7 @@ App.View.Settings = Backbone.View.extend({
     },
 
     show: function () {
+        App.settings.subtitles = App.Providers.subtitle.getAll();
         $('body').removeClass().addClass('sidebar-open');
         this.$el.removeClass('hidden');
         this.render();
